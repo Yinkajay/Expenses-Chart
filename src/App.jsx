@@ -1,34 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react';
 import './App.css'
+import Bar from './components/Bar';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [days, setDays] = useState([])
+
+
+  useEffect(() => {
+    fetch('../../data.json')
+      .then(response => response.json())
+      .then(json => {
+        setDays(json)
+        console.log(json)
+      });
+
+  }, []);
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <div className="">
+        My balance
+        $921.48
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="">
+        <h2>Spending - Last 7 days</h2>
+        <div className="bar-area">
+          <div className="">
+            {days?.map(day => <Bar key={day.day} day={day} />)}
+          </div>
+        </div>
+        <div className="">
+          <p>Total this month</p>
+          <div className=""></div>
+          <h2>$478.33</h2>
+          <p>+2.4%</p>
+          <p>from last month</p>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <div className="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" >Frontend Mentor</a>.
+        Coded by <a href="#">Yinx</a>.
+      </div>
+    </div>
   )
 }
 
