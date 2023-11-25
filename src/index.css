@@ -16,4 +16,9 @@ body{
   justify-content: center;
   align-items: center;  
   font-family: 'DM Sans', sans-serif;
+  position: relative;
+}
+
+a{
+  text-decoration: none;
 }

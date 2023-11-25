@@ -5,6 +5,7 @@ import logo from '../images/logo.svg'
 
 function App() {
   const [days, setDays] = useState([])
+  const [currentDay, setCurrentDay] = useState('')
 
 
   useEffect(() => {
@@ -17,6 +18,10 @@ function App() {
 
   }, []);
 
+  const changeSelectedDayHandler = (dayOfWeek) => {
+    setCurrentDay(dayOfWeek)
+    return
+  }
 
   return (
     <div className='app'>
@@ -31,7 +36,7 @@ function App() {
         <h2>Spending - Last 7 days</h2>
         <div className="bar-area">
           <div className="bar-list">
-            {days?.map(day => <Bar key={day.day} day={day} />)}
+            {days?.map(day => <Bar key={day.day} day={day} changeSelectedDate={changeSelectedDayHandler} currentDay={currentDay} />)}
           </div>
         </div>
         <div className="monthly-stats">
@@ -46,8 +51,10 @@ function App() {
         </div>
       </div>
       <div className="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" >Frontend Mentor</a>.
-        Coded by <a href="#">Yinx</a>.
+        <p>
+          Challenge by <a href="https://www.frontendmentor.io?ref=challenge" >Frontend Mentor</a>.
+          Coded by <a href="https://github.com/Yinkajay">Yinx</a>.
+        </p>
       </div>
     </div>
   )

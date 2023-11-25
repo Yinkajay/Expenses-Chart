@@ -1,9 +1,15 @@
 import React from 'react'
 
-const Bar = ({ day }) => {
+const Bar = ({ day, changeSelectedDate, currentDay }) => {
+
+    function handleDayClick(day) {
+        console.log(day)
+    }
+
     return (
-        <div className='single-day'>
-            <div className='single-bar' style={{height: '20px'}}></div>
+        <div className={`${'single-day'} `} onClick={() => handleDayClick(day.day)}>
+            {currentDay}
+            <div title={`$${day.amount}`} className={` ${'single-bar'} ${day.day == 'wed' ? 'wednesday' : ''}`} style={{ height: `${day.amount * 3}px` }}></div>
             <p>{day.day}</p>
         </div>
     )
